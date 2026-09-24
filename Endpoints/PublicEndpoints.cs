@@ -50,18 +50,6 @@ public static class PublicEndpoints
         {
             var settings = await db.SiteSettings.ToDictionaryAsync(s => s.Key, s => s.Value);
 
-            // إذا لم يُضبط الفيديو يدويًا، نأخذ تلقائيًا آخر فيديو مرفوع في الوسائط
-            if (string.IsNullOrWhiteSpace(settings.GetValueOrDefault("hero_video_url")))
-            {
-                var latestVideo = await db.MediaFiles
-                    .Where(m => m.Kind == "video")
-                    .OrderByDescending(m => m.CreatedAt)
-                    .Select(m => m.Url)
-                    .FirstOrDefaultAsync();
-                if (!string.IsNullOrWhiteSpace(latestVideo))
-                    settings["hero_video_url"] = latestVideo;
-            }
-
             return Results.Ok(new
             {
                 // Read-only on every page load: AsNoTracking skips change-tracking memory

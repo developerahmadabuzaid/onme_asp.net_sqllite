@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@Model.Setting("seo_title", "OnMe | خلّها علينا — وكيلك الشخصي لإنجاز مهامك")</title>
   <meta name="description" content="@Model.Setting("seo_description", "عندك مهمة ما عندك وقت لها؟ أرسلها إلى OnMe، وخلّنا نراجع البحث والتواصل والتنسيق والمتابعة عنك.")" />
-  <meta name="theme-color" content="#F7F4EE" />
+  <meta name="theme-color" content="#191b1d" />
   <meta property="og:title" content="OnMe | خلّها علينا" />
   <meta property="og:description" content="عندك مهمة؟ خلّها علينا. أرسل اللي تحتاجه ونبحث عن الطريقة المناسبة لتنفيذه." />
   <meta property="og:image" content="assets/logo.jpeg" />
@@ -31,11 +31,12 @@
   <header class="site-header" id="top">
     <div class="nav-shell">
       <a class="brand" href="#top" aria-label="OnMe الرئيسية">
-        <img src="assets/logo.jpeg" alt="OnMe — خلّها علينا" />
+        <span class="brand-symbol" aria-hidden="true"><img src="assets/logo.jpeg" alt="" /></span>
+        <span class="brand-copy"><strong>On<span>Me</span></strong><small>خلّها علينا</small></span>
       </a>
       <nav class="nav-links" id="primaryNav" aria-label="التنقل الرئيسي">
         <a class="active" href="#top">الرئيسية</a>
-        <a href="#services">الخدمات</a>
+        <a href="#services">خدماتنا</a>
         <a href="#how">كيف نعمل؟</a>
         <a href="#faq">الأسئلة الشائعة</a>
       </nav>
@@ -46,48 +47,282 @@
     </div>
   </header>
 
+  <!-- Inline SVG sprite (3D realistic icons, same family as assets/services.jpg) -->
+  <svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="svcOrangeBody" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffb56b"/>
+        <stop offset=".5" stop-color="#f58220"/>
+        <stop offset="1" stop-color="#c45a18"/>
+      </linearGradient>
+      <linearGradient id="svcOrangeBodySoft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffc890"/>
+        <stop offset=".55" stop-color="#f59a47"/>
+        <stop offset="1" stop-color="#d26911"/>
+      </linearGradient>
+      <linearGradient id="svcOrangeHandle" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e07b1a"/>
+        <stop offset="1" stop-color="#7a3500"/>
+      </linearGradient>
+      <linearGradient id="svcPaperLight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#f1ece1"/>
+      </linearGradient>
+      <linearGradient id="svcPaperEdge" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f5ede0"/>
+        <stop offset="1" stop-color="#d8cfbe"/>
+      </linearGradient>
+      <linearGradient id="svcLaptopScreen" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4a4f57"/>
+        <stop offset="1" stop-color="#2a2d33"/>
+      </linearGradient>
+      <radialGradient id="svcLensGlow" cx=".35" cy=".35" r=".75">
+        <stop offset="0" stop-color="#ffffff" stop-opacity=".9"/>
+        <stop offset=".55" stop-color="#fff0e2" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#fff0e2" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="svcShadow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2.2"/>
+        <feOffset dy="3"/>
+        <feComponentTransfer><feFuncA type="linear" slope=".32"/></feComponentTransfer>
+        <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+
+      <!-- 1. البحث والمقارنة -->
+      <symbol id="icon-svc-search" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <rect x="72" y="72" width="40" height="13" rx="6.5" transform="rotate(45 72 72)" fill="url(#svcOrangeHandle)"/>
+          <circle cx="50" cy="50" r="36" fill="url(#svcOrangeBody)"/>
+          <circle cx="50" cy="50" r="25" fill="url(#svcPaperLight)"/>
+          <circle cx="50" cy="50" r="25" fill="url(#svcLensGlow)"/>
+          <ellipse cx="40" cy="40" rx="10" ry="6" fill="#ffffff" opacity=".55" transform="rotate(-30 40 40)"/>
+          <rect x="36" y="42" width="13" height="3.4" rx="1.6" fill="#f58220"/>
+          <rect x="36" y="49" width="22" height="3.4" rx="1.6" fill="#f58220"/>
+          <rect x="36" y="56" width="17" height="3.4" rx="1.6" fill="#f58220"/>
+        </g>
+      </symbol>
+
+      <!-- 2. الحضور عنك والتنفيذ -->
+      <symbol id="icon-svc-attend" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <ellipse cx="60" cy="108" rx="14" ry="3.5" fill="#000" opacity=".14"/>
+          <path d="M60 14 C84 14 96 32 96 50 C96 70 78 90 60 108 C42 90 24 70 24 50 C24 32 36 14 60 14 Z" fill="url(#svcOrangeBody)"/>
+          <path d="M60 14 C84 14 96 32 96 50 C96 58 93 66 89 73 C84 60 76 52 60 50 C44 52 36 60 31 73 C27 66 24 58 24 50 C24 32 36 14 60 14 Z" fill="#ffffff" opacity=".22"/>
+          <circle cx="60" cy="50" r="17" fill="#fffaf3"/>
+          <circle cx="60" cy="44" r="6.5" fill="url(#svcOrangeBodySoft)"/>
+          <path d="M46 64 C48 56 54 53 60 53 C66 53 72 56 74 64 Z" fill="url(#svcOrangeBodySoft)"/>
+          <ellipse cx="52" cy="28" rx="14" ry="7" fill="#ffffff" opacity=".45" transform="rotate(-22 52 28)"/>
+        </g>
+      </symbol>
+
+      <!-- 3. الإشراف على التنفيذ -->
+      <symbol id="icon-svc-supervise" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <ellipse cx="60" cy="108" rx="22" ry="3.5" fill="#000" opacity=".14"/>
+          <rect x="22" y="20" width="68" height="84" rx="8" fill="url(#svcPaperEdge)"/>
+          <rect x="26" y="24" width="60" height="76" rx="6" fill="url(#svcPaperLight)"/>
+          <rect x="44" y="14" width="24" height="14" rx="4" fill="url(#svcOrangeHandle)"/>
+          <rect x="48" y="17" width="16" height="8" rx="2" fill="#a04500"/>
+          <circle cx="40" cy="48" r="9" fill="none" stroke="url(#svcOrangeBodySoft)" stroke-width="3"/>
+          <circle cx="40" cy="48" r="4" fill="url(#svcOrangeBodySoft)"/>
+          <circle cx="34" cy="44" r="1.6" fill="#ffffff" opacity=".8"/>
+          <rect x="55" y="44" width="26" height="3.4" rx="1.6" fill="#d8cfbe"/>
+          <rect x="55" y="51" width="20" height="3.4" rx="1.6" fill="#d8cfbe"/>
+          <rect x="32" y="68" width="50" height="6" rx="3" fill="#f0e6d4"/>
+          <rect x="32" y="68" width="36" height="6" rx="3" fill="url(#svcOrangeBody)"/>
+          <path d="M52 82 L57 87 L68 76" stroke="url(#svcOrangeBody)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <rect x="28" y="90" width="20" height="3.4" rx="1.6" fill="#d8cfbe"/>
+        </g>
+      </symbol>
+
+      <!-- 4. المراجعة والمتابعة -->
+      <symbol id="icon-svc-review" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <ellipse cx="58" cy="104" rx="32" ry="4" fill="#000" opacity=".14"/>
+          <rect x="22" y="48" width="58" height="60" rx="5" fill="url(#svcPaperEdge)" transform="rotate(-8 51 78)"/>
+          <rect x="22" y="40" width="58" height="60" rx="5" fill="url(#svcPaperLight)" transform="rotate(-8 51 70)"/>
+          <rect x="22" y="32" width="58" height="60" rx="5" fill="#ffffff" transform="rotate(-8 51 62)"/>
+          <g transform="rotate(-8 51 62)">
+            <rect x="30" y="42" width="42" height="3.4" rx="1.6" fill="#e3d8c2"/>
+            <rect x="30" y="50" width="36" height="3.4" rx="1.6" fill="#e3d8c2"/>
+            <rect x="30" y="58" width="40" height="3.4" rx="1.6" fill="#e3d8c2"/>
+            <rect x="30" y="66" width="30" height="3.4" rx="1.6" fill="#e3d8c2"/>
+            <rect x="30" y="74" width="34" height="3.4" rx="1.6" fill="#e3d8c2"/>
+          </g>
+          <rect x="62" y="58" width="44" height="12" rx="6" transform="rotate(40 62 58)" fill="url(#svcOrangeHandle)"/>
+          <circle cx="76" cy="44" r="22" fill="url(#svcOrangeBody)"/>
+          <circle cx="76" cy="44" r="15" fill="#fffaf3"/>
+          <circle cx="76" cy="44" r="15" fill="url(#svcLensGlow)"/>
+          <ellipse cx="70" cy="38" rx="6" ry="3.5" fill="#ffffff" opacity=".55" transform="rotate(-30 70 38)"/>
+        </g>
+      </symbol>
+
+      <!-- 5. التنسيق والترتيب -->
+      <symbol id="icon-svc-calendar" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <ellipse cx="60" cy="108" rx="32" ry="4" fill="#000" opacity=".14"/>
+          <rect x="30" y="14" width="6" height="18" rx="2.5" fill="url(#svcOrangeHandle)"/>
+          <rect x="84" y="14" width="6" height="18" rx="2.5" fill="url(#svcOrangeHandle)"/>
+          <rect x="20" y="24" width="80" height="80" rx="9" fill="url(#svcPaperEdge)"/>
+          <rect x="20" y="24" width="80" height="22" fill="url(#svcOrangeBody)"/>
+          <rect x="20" y="24" width="80" height="80" rx="9" fill="none" stroke="#a04500" stroke-width="1" opacity=".25"/>
+          <rect x="26" y="52" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="44" y="52" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="62" y="52" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="80" y="52" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="26" y="68" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="44" y="68" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="62" y="68" width="14" height="12" rx="2" fill="#fffaf3"/>
+          <rect x="80" y="68" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="26" y="84" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="44" y="84" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="62" y="84" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <rect x="80" y="84" width="14" height="12" rx="2" fill="#f0e6d4"/>
+          <path d="M64 74 L68 78 L76 70" stroke="url(#svcOrangeBody)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="60" y="40" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#fffaf3" text-anchor="middle" opacity=".9">JUN</text>
+        </g>
+      </symbol>
+
+      <!-- 6. المهام الإلكترونية -->
+      <symbol id="icon-svc-laptop" viewBox="0 0 120 120">
+        <g filter="url(#svcShadow)">
+          <ellipse cx="60" cy="100" rx="36" ry="4" fill="#000" opacity=".18"/>
+          <path d="M18 88 L102 88 L98 78 L22 78 Z" fill="url(#svcOrangeHandle)"/>
+          <rect x="22" y="78" width="76" height="4" rx="2" fill="#a04500"/>
+          <rect x="28" y="22" width="64" height="58" rx="4" fill="#2a2d33"/>
+          <rect x="32" y="26" width="56" height="50" rx="2" fill="url(#svcLaptopScreen)"/>
+          <rect x="36" y="30" width="48" height="3.2" rx="1.5" fill="#f58220"/>
+          <rect x="36" y="38" width="32" height="2.6" rx="1.2" fill="#9da2a8"/>
+          <rect x="36" y="44" width="38" height="2.6" rx="1.2" fill="#9da2a8"/>
+          <rect x="36" y="50" width="28" height="2.6" rx="1.2" fill="#9da2a8"/>
+          <rect x="36" y="56" width="34" height="2.6" rx="1.2" fill="#9da2a8"/>
+          <rect x="36" y="62" width="22" height="2.6" rx="1.2" fill="#9da2a8"/>
+          <circle cx="56" cy="72" r="1.5" fill="#9da2a8" opacity=".5"/>
+          <ellipse cx="80" cy="30" rx="6" ry="3" fill="#ffffff" opacity=".18"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
   <main>
-    <section class="hero">
-      <div class="hero-media">
-        <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="auto" poster="assets/logo.jpeg" aria-label="فيديو تعريفي بمنصة OnMe"></video>
-        <div class="hero-shade"></div>
-        <button id="heroPlay" class="video-play" type="button" aria-label="تشغيل الفيديو"><span aria-hidden="true">▶</span></button>
-        <button id="heroMute" class="video-mute" type="button" aria-label="تشغيل الصوت" aria-pressed="false">تشغيل الصوت</button>
+    <section class="hero-section hero-image-section">
+      <div class="container">
+        <img class="hero-reference-image" src="assets/hero.jpg" alt="OnMe — عندك مهمة؟ خلّها علينا" fetchpriority="high" />
       </div>
-      <div class="hero-shell">
-        <div class="hero-copy reveal">
-          <span class="hero-kicker">وكيلك الشخصي لإنجاز مهامك</span>
-          <h1>عندك مهمة؟<span>خلّها علينا.</span></h1>
-          <p>بدل ما تبحث وتتصل وتنسق وتنتظر... أرسل لنا اللي تحتاجه، ونتولى نحن البحث والتنسيق والمتابعة حتى توصل للنتيجة الممكنة.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" href="#lead-form">اطلب مهمة الآن <span aria-hidden="true">←</span></a>
-            <a class="btn btn-light btn-lg" href="#how"><span aria-hidden="true">▶</span> شاهد كيف نعمل</a>
-          </div>
-          <div class="trust-grid" aria-label="مميزات OnMe">
-            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span>خصوصية</span></div>
-            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span><span>سرعة</span></div>
-            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span>أمان</span></div>
-            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><span>موثوقية</span></div>
-          </div>
-        </div>
-      </div>
-      <a class="hero-scroll" href="#services" aria-label="انتقل إلى الخدمات"><span>اكتشف المزيد</span><i aria-hidden="true"></i></a>
     </section>
 
     <section class="section services-section" id="services">
       <div class="container">
         <div class="section-heading reveal">
           <span class="section-tag">خدماتنا</span>
-          <h2>وش ممكن <em>OnMe</em> ينجز لك؟</h2>
-          <p>مهمتك مو لازم تكون ضمن قائمة محددة. أرسل اللي تحتاجه، ونبحث عن أفضل طريقة للتعامل معه.</p>
+          <h2>وش تقدر تطلب من <em>OnMe</em>؟</h2>
+          <p>اختر الخدمة المناسبة لمهمتك، واضغط عليها للتفاصيل.</p>
         </div>
-        <div class="service-grid">
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 8h4M8 12h8"/></svg></span><h3>المهام الإلكترونية</h3><p>بحث، إدخال، حقوقي، حجوزات، واتصالات.</p></article>
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h3M8 17h7"/></svg></span><h3>التسجيل والتنسيق</h3><p>مواعيد، جلسات، وترتيب المواعيد.</p></article>
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4"/><path d="M16 17h5v4h-5z"/></svg></span><h3>الأبحاث عن التنفيذ</h3><p>دراسة سهولة التنفيذ قبل أن نبدأ.</p></article>
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M8 10.5l1.7 1.7 3.6-3.7"/></svg></span><h3>البحث والمقارنة</h3><p>معلومات، خيارات، منتجات، وقرارات أذكى.</p></article>
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7M9 16h7"/></svg></span><h3>المراجعة والتنسيق</h3><p>ملفات، طلبات، ومراجعات.</p></article>
-          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span><h3>التواصل والتنسيق</h3><p>معلومات، تواصل، وتنسيق مع الجهات.</p></article>
+
+        <div class="services-stack" role="list">
+          <!-- Row 1: search, attend, supervise -->
+          <div class="svc-row" data-row="0">
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-1" data-row="0" data-idx="0" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-search"/></svg>
+              </span>
+              <h3 class="svc-title">البحث والمقارنة</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-1">
+                <div class="svc-detail-inner">
+                  <h4>البحث والمقارنة</h4>
+                  <p>نبحث عن الخيارات المناسبة لطلبك، نقارن بينها، ونختصر لك الأفضل لاتخاذ قرارك بسهولة.</p>
+                </div>
+              </div>
+            </button>
+
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-2" data-row="0" data-idx="1" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-attend"/></svg>
+              </span>
+              <h3 class="svc-title">الحضور عنك والتنفيذ</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-2">
+                <div class="svc-detail-inner">
+                  <h4>الحضور عنك والتنفيذ</h4>
+                  <p>نحضر للموقع ونتولى تنفيذ المطلوب ومتابعته وتنفيذ كل الإجراءات بالنيابة عنك.</p>
+                </div>
+              </div>
+            </button>
+
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-3" data-row="0" data-idx="2" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-supervise"/></svg>
+              </span>
+              <h3 class="svc-title">الإشراف على التنفيذ</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-3">
+                <div class="svc-detail-inner">
+                  <h4>الإشراف على التنفيذ</h4>
+                  <p>نتابع تنفيذ مهمتك خطوة بخطوة، ونتأكد من سيرها وفق المطلوب، ونطلعك على المستجدات حتى اكتمالها.</p>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div class="row-bar" data-row="0" aria-live="polite"></div>
+
+          <!-- Row 2: review, calendar, laptop -->
+          <div class="svc-row" data-row="1">
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-4" data-row="1" data-idx="0" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-review"/></svg>
+              </span>
+              <h3 class="svc-title">المراجعة والمتابعة</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-4">
+                <div class="svc-detail-inner">
+                  <h4>المراجعة والمتابعة</h4>
+                  <p>نتولى عنك مراجعة الجهات الحكومية والقطاع الخاص، ومتابعة المعاملات والطلبات والإجراءات، والتواصل مع الجهات ذات العلاقة حتى استكمال المطلوب، مع إبقائك على اطلاع بالمستجدات.</p>
+                </div>
+              </div>
+            </button>
+
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-5" data-row="1" data-idx="1" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-calendar"/></svg>
+              </span>
+              <h3 class="svc-title">التنسيق والترتيب</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-5">
+                <div class="svc-detail-inner">
+                  <h4>التنسيق والترتيب</h4>
+                  <p>فريق مختص يتولى تنسيق وترتيب متطلباتك من البداية حتى الاكتمال، بما يشمل المواعيد والحجوزات، المناسبات الخاصة والعامة، تنسيق الخدمات ومقدميها، التواصل بين الأطراف، وترتيب التفاصيل والمتطلبات؛ لتكون جميعها منظمة ومتابعة دون أن تشغلك تفاصيلها.</p>
+                </div>
+              </div>
+            </button>
+
+            <button class="service-tile" type="button" aria-expanded="false" aria-controls="svc-d-6" data-row="1" data-idx="2" role="listitem">
+              <span class="svc-icon" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="svc-svg"><use href="#icon-svc-laptop"/></svg>
+              </span>
+              <h3 class="svc-title">المهام الإلكترونية</h3>
+              <span class="svc-chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </span>
+              <div class="svc-detail" id="svc-d-6">
+                <div class="svc-detail-inner">
+                  <h4>المهام الإلكترونية</h4>
+                  <p>فريق مختص يتولى تنفيذ ومتابعة مختلف المهام والخدمات الإلكترونية عن بُعد، بما يشمل الخدمات الحكومية وخدمات القطاع الخاص، تقديم ومتابعة الطلبات، الحجوزات والمواعيد، البحث، التواصل والتنسيق والإجراءات الرقمية، حتى استكمال المطلوب وفق نطاق الخدمة.</p>
+                </div>
+              </div>
+            </button>
+          </div>
+          <div class="row-bar" data-row="1" aria-live="polite"></div>
         </div>
       </div>
     </section>
@@ -95,106 +330,70 @@
     <section class="section process-section" id="how">
       <div class="container">
         <div class="process-shell reveal">
-          <div class="process-heading">
-            <span class="section-tag">كيف نعمل؟</span>
-            <h2>من طلبك <em>إلى الإنجاز</em></h2>
-            <p>خمس مراحل واضحة، ونبقيك على اطلاع بكل خطوة.</p>
-          </div>
+          <div class="process-heading"><span class="section-tag">كيف نعمل؟</span><h2>من طلبك <em>إلى الإنجاز</em></h2><p>خطوات بسيطة وواضحة، نرتبها لك حتى توصل للنتيجة.</p></div>
           <ol class="process-timeline">
-            <li class="process-step"><span class="process-index">1</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></span><h3>اكتب المهمة</h3><p>قل لنا بما تحتاجه، حتى لو لم تكن متأكدًا من خطواته.</p></li>
-            <li class="process-step"><span class="process-index">2</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7M9 16h5"/></svg></span><h3>نراجع التفاصيل</h3><p>نفهم المطلوب والزمن المناسب والخطوة التالية.</p></li>
-            <li class="process-step"><span class="process-index">3</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><h3>نتولى ونتواصل</h3><p>نبحث، نسق، ونتواصل مع الجهات نيابة عنك.</p></li>
-            <li class="process-step"><span class="process-index">4</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span><h3>نتابع ونرتب</h3><p>نتابع الخطوات ونحدّثك بكل جديد.</p></li>
-            <li class="process-step"><span class="process-index">5</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.8-5.4"/></svg></span><h3>نسلّم النتيجة</h3><p>نوضح لك ما تم وأين وصلنا.</p></li>
+            <li class="process-step"><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></span><span class="process-index">1</span><h3>اكتب المهمة</h3><p>قل لنا اللي تحتاجه، حتى لو ما تعرف خطواته.</p></li>
+            <li class="process-step"><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7"/></svg></span><span class="process-index">2</span><h3>نراجع التفاصيل</h3><p>نراجع الطلب والوقت المناسب والخطوة التالية.</p></li>
+            <li class="process-step"><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v12H4z"/><path d="M8 7V5a4 4 0 0 1 8 0v2M8 12h8"/></svg></span><span class="process-index">3</span><h3>نتولى ونتواصل</h3><p>نبحث وننسق ونتواصل مع الجهات.</p></li>
+            <li class="process-step"><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span><span class="process-index">4</span><h3>نتابع ونرتب</h3><p>نحدثك بكل جديد ونرتب لك أولوياتك.</p></li>
+            <li class="process-step"><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.8-5.4"/></svg></span><span class="process-index">5</span><h3>نسلّم النتيجة</h3><p>نوضح لك ما تم وأين وصلنا.</p></li>
           </ol>
         </div>
+      </div>
+    </section>
+
+    <section class="section footer-image-section">
+      <div class="container">
+        <img class="footer-reference-image reveal" src="assets/footer.jpg" alt="لأن وقتك يستاهل أكثر — OnMe يرتب مهامك ويتابعها حتى الإنجاز" />
+        <a class="footer-reference-cta" href="#lead-form" aria-label="اطلب مهمة الآن"></a>
       </div>
     </section>
 
     <section class="section request-section">
       <div class="container request-layout">
         <div class="request-copy reveal">
-          <span class="section-tag">طلبك أسهل مما تتخيل</span>
-          <h2>خلّنا نرتّب همومك، وأنت ركّز على شغلك.</h2>
-          <p>عندك مهمة تحتاج وقت أو متابعة أو تنسيق؟ أرسلها لنا، ونبحث عن الطريق المناسب لتنفيذها داخل السعودية أو خارجها.</p>
+          <span class="section-tag">خلّها علينا</span>
+          <h2>لأن وقتك يستاهل أكثر</h2>
+          <p>بعض المهام تستاهل تكون بأيدٍ خبيرة. كل اللي عليك تختار، وOnMe يتكفّل بالبحث، التواصل، وأولوياتك.</p>
+          <div class="request-note"><span class="request-note-icon" aria-hidden="true">✦</span><span>خصوصيتك عندنا، ووقتك علينا.</span></div>
           <a class="btn btn-primary btn-lg" href="#lead-form">اطلب مهمة الآن <span aria-hidden="true">←</span></a>
-          <div class="request-note"><span class="request-note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span>نحافظ على سرية بياناتك ونستخدمها لتنفيذ طلبك فقط.</span></div>
         </div>
-        <div class="request-visual reveal">
-          <div class="phone-mockup" aria-label="معاينة لمتابعة المهمة">
-            <div class="phone-speaker"></div>
-            <div class="phone-screen">
-              <div class="phone-brand"><img src="assets/logo.jpeg" alt="OnMe" /><span>مهامك في OnMe</span></div>
-              <div class="phone-task" id="exampleTyper">
-                <div class="tw-head"><span class="tw-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><span class="tw-who"><b>مهمتك الآن</b><small>نراجعها ونبدأ</small></span><span class="tw-live" aria-hidden="true"><i></i><i></i><i></i></span></div>
-                <p class="tw-text" aria-hidden="true"><span id="twText">أحتاج البحث والمقارنة والترتيب قبل اتخاذ قرار.</span><span class="tw-caret" aria-hidden="true"></span></p>
-                <div class="tw-foot"><span class="tw-progress" id="twDots" aria-hidden="true"></span><span class="tw-count" id="twCount">1 / 4</span></div>
-              </div>
-              <div class="phone-checklist" aria-label="مراحل المتابعة"><div><span>1</span><b>استلمنا طلبك</b></div><div><span>2</span><b>نبحث ونتواصل</b></div><div><span>3</span><b>ننسق ونتابع</b></div></div>
-            </div>
-          </div>
+        <div class="phone-panel reveal" id="exampleTyper">
+          <div class="phone-panel-head"><span>مهمتك</span><span class="phone-status">OnMe</span></div>
+          <div class="phone-task"><p id="twText">أحتاج البحث والمقارنة والترتيب قبل اتخاذ قرار.</p><div class="tw-foot"><span class="tw-progress" id="twDots"></span><span id="twCount">1 / 4</span></div></div>
+          <ul class="phone-checklist"><li><span>1</span>مهمتك في OnMe</li><li><span>2</span>بحث وتواصل</li><li><span>3</span>متابعة وإنجاز</li></ul>
         </div>
       </div>
-      <div class="container">
-        <div class="impact-strip reveal" aria-label="مميزات الخدمة">
-          <div class="impact-item"><strong>6+</strong><span>أنواع المهام</span></div>
-          <div class="impact-item"><strong>5</strong><span>مراحل واضحة</span></div>
-          <div class="impact-item"><strong>24/7</strong><span>نتبعها معك</span></div>
-          <div class="impact-item"><strong>100%</strong><span>خصوصية وأمان</span></div>
-          <a class="impact-cta" href="#lead-form">جاهز تبدأ؟ <span aria-hidden="true">←</span></a>
-        </div>
-      </div>
+      <div class="container stats-strip"><div><strong>+10,000</strong><span>مهمة منجزة</span></div><div><strong>98%</strong><span>رضا العملاء</span></div><div><strong>+5,000</strong><span>مهمة في بنता</span></div><div><strong>+20</strong><span>مدينة نخدمها</span></div></div>
     </section>
 
     <section class="section form-section" id="lead-form">
       <div class="container form-layout">
-        <div class="form-intro reveal">
-          <span class="section-tag">نبدأ معك من هنا</span>
-          <h2>أرسل طلبك، وخلّنا نتولى الباقي.</h2>
-          <p>ما تحتاج تعرف الخطوات بالضبط. اكتب لنا المطلوب، وسنراجعه ونوضح لك الخطوة التالية.</p>
-          <ul class="form-points"><li><span aria-hidden="true">✓</span>رد خلال ساعات العمل</li><li><span aria-hidden="true">✓</span>بدون التزام أو عقود معقدة</li><li><span aria-hidden="true">✓</span>متابعة حتى آخر خطوة</li></ul>
-          <a class="phone-link" href="tel:@Model.Setting("phone", "0533851110")" dir="ltr">@Model.Setting("phone", "0533851110")</a>
-        </div>
         <div class="form-card reveal">
-          <div id="form-view">
-            <div class="form-card-head"><span>طلب مهمة جديد</span><h3>وش تحتاج؟</h3></div>
+          <div id="form-view"><div class="form-card-head"><span>طلب مهمة جديد</span><h3>وش تحتاج؟</h3></div>
             <form id="leadForm" novalidate>
-              <div class="form-row">
-                <label class="field"><span>الاسم</span><span class="control"><input type="text" name="name" placeholder="اكتب اسمك" autocomplete="name" required /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><small class="err" data-err="name"></small></label>
-                <label class="field"><span>رقم الجوال</span><span class="control"><input type="tel" name="phone" placeholder="05XXXXXXXX" inputmode="numeric" autocomplete="tel" required /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><small class="err" data-err="phone"></small></label>
-              </div>
-              <label class="field"><span>وصف المهمة</span><span class="control"><textarea name="description" rows="4" placeholder="اكتب تفاصيل المهمة، وما النتيجة التي تريد الوصول إليها..." required></textarea><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg></span><small class="err" data-err="description"></small></label>
+              <div class="form-row"><label class="field"><span>الاسم</span><span class="control"><input type="text" name="name" placeholder="اكتب اسمك" autocomplete="name" required /></span><small class="err" data-err="name"></small></label><label class="field"><span>رقم الجوال</span><span class="control"><input type="tel" name="phone" placeholder="05XXXXXXXX" inputmode="numeric" autocomplete="tel" required /></span><small class="err" data-err="phone"></small></label></div>
+              <label class="field"><span>وصف المهمة</span><span class="control"><textarea name="description" rows="4" placeholder="اكتب تفاصيل المهمة، وما النتيجة التي تريد الوصول إليها..." required></textarea></span><small class="err" data-err="description"></small></label>
               <fieldset class="field"><legend>وين المهمة؟ <em>(اختياري)</em></legend><div class="radios"><label><input type="radio" name="location" value="inside_saudi" /> داخل السعودية</label><label><input type="radio" name="location" value="outside_saudi" /> خارج السعودية</label><label><input type="radio" name="location" value="unsure" /> غير متأكد</label></div></fieldset>
-              <button type="submit" class="btn btn-primary btn-block" id="submitBtn">أرسل طلبي <span class="btn-arrow" aria-hidden="true">←</span></button>
-              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+              <button type="submit" class="btn btn-primary btn-block" id="submitBtn">أرسل طلبي <span class="btn-arrow" aria-hidden="true">←</span></button><p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             </form>
           </div>
           <div id="success-view" hidden><div class="success-check" aria-hidden="true">✓</div><h3>وصلنا طلبك.</h3><p>شكرًا لك. استلمنا تفاصيل المهمة، وسنتواصل معك لمراجعة المطلوب والخطوات التالية.</p><p class="ref" id="leadRef"></p><a href="#top" class="text-link">العودة إلى الصفحة الرئيسية ←</a></div>
+        </div>
+        <div class="form-video reveal">
+          <video class="form-video-player" controls playsinline preload="metadata" poster="assets/logo.jpeg" aria-label="فيديو تعريفي بمنصة OnMe">
+            <source src="uploads/02e9ded4e7124538940390661cac457e.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </section>
 
     <section class="section faq-section" id="faq">
-      <div class="container faq-layout">
-        <div class="faq-heading reveal"><span class="section-tag">قبل ما ترسل</span><h2>أسئلة سريعة</h2><p>إذا ما لقيت جوابك، أرسل لنا وسنراجع طلبك مباشرة.</p></div>
-        <div class="accordion reveal">
-          <details class="acc" open><summary>هل تنفذون أي مهمة؟</summary><p>كل مهمة تختلف. أرسل التفاصيل وسنراجع إمكانية تنفيذها والخطوات المناسبة لها.</p></details>
-          <details class="acc"><summary>هل الخدمة داخل السعودية فقط؟</summary><p>يمكن أن تكون المهمة داخل السعودية أو خارجها، حسب طبيعة المهمة وإمكانية تنفيذها.</p></details>
-          <details class="acc"><summary>هل يجب أن أعرف طريقة تنفيذ المهمة؟</summary><p>لا. اشرح النتيجة التي تريد الوصول إليها، وسنبحث عن الطريقة المناسبة لما يمكننا توليه.</p></details>
-          <details class="acc"><summary>كم تستغرق المهمة؟</summary><p>تختلف المدة حسب طبيعة المهمة والجهات المطلوبة. نوضح الخطوات والمدة المتوقعة بعد مراجعة الطلب.</p></details>
-        </div>
-      </div>
+      <div class="container faq-layout"><div class="faq-heading reveal"><span class="section-tag">قبل ما ترسل</span><h2>أسئلة سريعة</h2><p>إذا ما لقيت جوابك، أرسل لنا وسنراجع طلبك مباشرة.</p></div><div class="accordion reveal"><details class="acc" open><summary>هل تنفذون أي مهمة؟</summary><p>كل مهمة تختلف. أرسل التفاصيل وسنراجع إمكانية تنفيذها والخطوات المناسبة لها.</p></details><details class="acc"><summary>هل الخدمة داخل السعودية فقط؟</summary><p>يمكن أن تكون المهمة داخل السعودية أو خارجها، حسب طبيعة المهمة وإمكانية تنفيذها.</p></details><details class="acc"><summary>هل يجب أن أعرف طريقة تنفيذ المهمة؟</summary><p>لا. اشرح النتيجة التي تريد الوصول إليها، وسنبحث عن الطريقة المناسبة لما يمكننا توليه.</p></details><details class="acc"><summary>كم تستغرق المهمة؟</summary><p>تختلف المدة حسب طبيعة المهمة والجهات المطلوبة. نوضح الخطوات والمدة المتوقعة بعد مراجعة الطلب.</p></details></div></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-main">
-      <div class="footer-brand"><img src="assets/logo.jpeg" alt="OnMe" /><div><strong>OnMe — خلّها علينا.</strong><span>وكيلك الشخصي لإنجاز مهامك</span></div></div>
-      <div class="footer-links"><a href="tel:@Model.Setting("phone", "0533851110")" dir="ltr">@Model.Setting("phone", "0533851110")</a><a href="#lead-form">أرسل طلبك</a><a href="#services">الخدمات</a></div>
-    </div>
-    <div class="container footer-bottom"><p class="copy">@Model.Setting("copyright", "© 2026 OnMe. All rights reserved.")</p><p class="credit"><span class="credit-dot" aria-hidden="true"></span> تطوير وتصميم شركة <strong class="credit-brand" dir="ltr">onyxvs</strong> لحلول الأعمال المتقدمة</p></div>
-  </footer>
-
+  <footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><span class="footer-symbol"><img src="assets/logo.jpeg" alt="OnMe" /></span><div><strong>OnMe — خلّها علينا.</strong><span>وكيلك الشخصي لإنجاز مهامك</span></div></div><div class="footer-links"><a href="tel:@Model.Setting("phone", "0533851110")" dir="ltr">@Model.Setting("phone", "0533851110")</a><a href="#lead-form">أرسل طلبك</a><a href="#services">الخدمات</a></div></div><div class="container footer-bottom"><p class="copy">@Model.Setting("copyright", "© 2026 OnMe. All rights reserved.")</p></div></footer>
   <script src="app.js" asp-append-version="true"></script>
 </body>
 </html>

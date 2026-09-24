@@ -1,4 +1,4 @@
-const CACHE = "onme-v5";
+const CACHE = "onme-v6";
 const CORE = [
   "./",
   "./Admin",

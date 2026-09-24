@@ -70,106 +70,71 @@
     });
   });
 
-  // Hero video: poster by default, auto-loads CMS video when configured
-  (function initHeroVideo() {
-    var video = document.getElementById("heroVideo");
-    var play = document.getElementById("heroPlay");
-    var muteBtn = document.getElementById("heroMute");
-    if (!video) return;
-    function showPlay(show) { if (play) play.classList.toggle("hidden", !show); }
-    function setMuteIcon() {
-      if (!muteBtn) return;
-      muteBtn.textContent = video.muted ? "تشغيل الصوت" : "كتم الصوت";
-      muteBtn.setAttribute("aria-pressed", String(!video.muted));
-    }
-    function playWithSound() {
-      if (!video.currentSrc) { video.focus(); return; }
-      video.muted = false;
-      video.volume = 1.0;
-      video.play().then(function () {
-        showPlay(false);
-      }).catch(function () {
-        showPlay(true);
-      });
-      setMuteIcon();
-    }
-    if (play) play.addEventListener("click", playWithSound);
-    if (muteBtn) muteBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      video.muted = !video.muted;
-      if (!video.muted) video.volume = 1.0;
-      if (video.paused) video.play().catch(function () {});
-      setMuteIcon();
-    });
-    var justUnlocked = false; // the tap that turned the sound on must not also pause the video
-    video.addEventListener("click", function () {
-      if (justUnlocked) { justUnlocked = false; return; }
-      if (video.paused) video.play().catch(function () {});
-      else video.pause();
-    });
-    // Match the frame to the video's real dimensions (portrait or landscape)
-    video.addEventListener("loadedmetadata", function () {
-      if (video.videoWidth && video.videoHeight)
-        video.style.setProperty("--video-ratio", video.videoWidth + " / " + video.videoHeight);
-    });
-    // Browsers block sound until the visitor interacts with the page. Try with sound first;
-    // if blocked, play muted and turn the sound on at the first real interaction.
-    // Only these events count as an "interaction" for the browser (touchstart/scroll do not).
-    var unlockEvents = ["pointerdown", "pointerup", "touchend", "click", "keydown"];
-    var unlocking = false;
-    function stopListening() {
-      unlockEvents.forEach(function (n) { document.removeEventListener(n, unlockSound, true); });
-      if (muteBtn) muteBtn.classList.remove("needs-sound");
-    }
-    function unlockSound(e) {
-      if (muteBtn && e && muteBtn.contains(e.target)) { stopListening(); return; } // the button handles itself
-      if (unlocking || !video.muted) return;
-      unlocking = true;
-      if (e && e.type !== "click" && e.target === video) justUnlocked = true;
-      video.muted = false;
-      video.volume = 1.0;
-      video.play().then(function () {
-        stopListening();
-      }).catch(function () {
-        justUnlocked = false;
-        video.muted = true; // still not allowed: stay muted and retry on the next interaction
-        video.play().catch(function () {});
-      }).then(function () { unlocking = false; setMuteIcon(); });
-    }
-    function autoplayWithSound() {
-      video.muted = false;
-      video.volume = 1.0;
-      video.play().then(function () {
-        showPlay(false); setMuteIcon();
-      }).catch(function () {
-        video.muted = true;
-        setMuteIcon();
-        if (muteBtn) muteBtn.classList.add("needs-sound");
-        video.play().then(function () { showPlay(false); }).catch(function () { showPlay(true); });
-        unlockEvents.forEach(function (n) { document.addEventListener(n, unlockSound, true); });
-      });
-    }
-    video.addEventListener("play", function () { showPlay(false); });
-    video.addEventListener("pause", function () { showPlay(true); });
+  (function initTyper() {
+    var box = document.getElementById("exampleTyper");
+    if (!box) return;
+    var fallback = [
+      "أحتاج ألقى موردًا في دولة أخرى لمنتج معين.",
+      "أريد أحدًا يتواصل مع عدة جهات ويجمع لي المعلومات.",
+      "عندي موضوع يحتاج متابعة في مدينة أخرى.",
+      "أحتاج البحث والمقارنة والترتيب قبل اتخاذ قرار."
+    ];
+    var texts = fallback.slice();
     fetch(API_BASE + "/api/content").then(function (r) {
       return r.ok ? r.json() : null;
     }).then(function (c) {
-      if (!c || !c.settings) return;
-      if (c.settings.hero_video_poster) video.poster = c.settings.hero_video_poster;
-      if (c.settings.hero_video_url) {
-        video.src = c.settings.hero_video_url;
-        video.loop = true;
-        video.muted = true;
-        video.volume = 1.0;
-        video.playsInline = true;
-        setMuteIcon();
-        video.oncanplay = function () {
-          video.oncanplay = null; // canplay fires again after seeking/looping
-          autoplayWithSound();
-        };
-        video.load();
+      if (c && c.examples && c.examples.length) texts = c.examples.map(function (e) { return e.text; });
+      start();
+    }).catch(function () { start(); });
+    var startedTyper = false;
+    function start() {
+      if (startedTyper) return;
+      startedTyper = true;
+      boot(texts);
+    }
+    function boot(items) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.getElementById("twText").textContent = items[0];
+        return;
       }
-    }).catch(function () {});
+      var textEl = document.getElementById("twText");
+      var dotsEl = document.getElementById("twDots");
+      var countEl = document.getElementById("twCount");
+      items.forEach(function (_, i) {
+        var d = document.createElement("i");
+        if (i === 0) d.className = "active";
+        dotsEl.appendChild(d);
+      });
+      var dots = dotsEl.children;
+      var idx = 0;
+      function mark() {
+        for (var k = 0; k < dots.length; k++) dots[k].className = k === idx ? "active" : "";
+        countEl.textContent = (idx + 1) + " / " + items.length;
+      }
+      function type(text, pos, done) {
+        textEl.textContent = text.slice(0, pos);
+        if (pos <= text.length) setTimeout(function () { type(text, pos + 1, done); }, 55);
+        else if (done) setTimeout(done, 2400);
+      }
+      function erase(text, pos, done) {
+        textEl.textContent = text.slice(0, pos);
+        if (pos > 0) setTimeout(function () { erase(text, pos - 1, done); }, 16);
+        else if (done) setTimeout(done, 450);
+      }
+      function cycle() {
+        mark();
+        type(items[idx], 1, function () {
+          erase(items[idx], items[idx].length, function () { idx = (idx + 1) % items.length; cycle(); });
+        });
+      }
+      var started = false;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !started) { started = true; cycle(); io.disconnect(); }
+        });
+      }, { threshold: 0.3 });
+      io.observe(box);
+    }
   })();
 
   // Services spotlight: one flashing card at a time, same place
@@ -217,90 +182,74 @@
     restart();
   })();
 
-  // Typewriter: one client message at a time, typed live (from CMS, fallback to defaults)
-  (function initTyper() {
-    var box = document.getElementById("exampleTyper");
-    if (!box) return;
-    var fallback = [
-      "أحتاج ألقى موردًا في دولة أخرى لمنتج معين.",
-      "أريد أحدًا يتواصل مع عدة جهات ويجمع لي المعلومات.",
-      "عندي موضوع يحتاج متابعة في مدينة أخرى.",
-      "أحتاج البحث والمقارنة والترتيب قبل اتخاذ قرار."
-    ];
-    var texts = fallback.slice();
-    fetch(API_BASE + "/api/content").then(function (r) {
-      return r.ok ? r.json() : null;
-    }).then(function (c) {
-      if (c && c.examples && c.examples.length) {
-        texts = c.examples.map(function (e) { return e.text; });
-      }
-      start();
-    }).catch(function () { start(); });
-    var startedTyper = false;
-    function start() {
-      if (startedTyper) return;
-      startedTyper = true;
-      boot(texts);
+  // Form
+  // Services grid: click a tile to expand its description.
+  //   Desktop (>720px): the description expands inside the tile.
+  //   Mobile  (≤720px): the description slides into a full-width bar BELOW the row.
+  (function initServices() {
+    var tiles = Array.prototype.slice.call(document.querySelectorAll(".service-tile"));
+    if (!tiles.length) return;
+    var rowBars = Array.prototype.slice.call(document.querySelectorAll(".row-bar"));
+    var mq = window.matchMedia("(max-width: 720px)");
+    var isMobile = function () { return mq.matches; };
+
+    function closeAll() {
+      tiles.forEach(function (t) { t.setAttribute("aria-expanded", "false"); });
+      rowBars.forEach(function (rb) { rb.classList.remove("is-open"); rb.innerHTML = ""; });
     }
-    function boot(texts) {
-    // Reduced motion: calm static list instead of animation
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var staticBox = document.createElement("div");
-      staticBox.className = "examples-static";
-      staticBox.innerHTML = texts.map(function (t) {
-        return "<blockquote>«" + t.replace(/</g, "&lt;") + "»</blockquote>";
-      }).join("");
-      box.replaceWith(staticBox);
-      return;
+
+    function escHtml(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
     }
-    var textEl = document.getElementById("twText");
-    var dotsEl = document.getElementById("twDots");
-    var countEl = document.getElementById("twCount");
-    texts.forEach(function (_, i) {
-      var d = document.createElement("i");
-      if (i === 0) d.className = "active";
-      dotsEl.appendChild(d);
+
+    function openMobile(tile) {
+      var row = tile.getAttribute("data-row");
+      var bar = document.querySelector('.row-bar[data-row="' + row + '"]');
+      if (!bar) return;
+      var titleEl = tile.querySelector(".svc-title");
+      var descEl = tile.querySelector(".svc-detail-inner p");
+      var title = titleEl ? titleEl.textContent.trim() : "";
+      var desc = descEl ? descEl.innerHTML.trim() : "";
+      bar.innerHTML = '<div class="row-bar-inner"><h4>' + escHtml(title) + '</h4><p>' + desc + '</p></div>';
+      // double rAF so the grid-template-rows transition can pick up the height change
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { bar.classList.add("is-open"); });
+      });
+      setTimeout(function () { bar.scrollIntoView({ behavior: "smooth", block: "center" }); }, 240);
+    }
+
+    tiles.forEach(function (tile) {
+      tile.addEventListener("click", function () {
+        var wasOpen = tile.getAttribute("aria-expanded") === "true";
+        closeAll();
+        if (wasOpen) return;
+        tile.setAttribute("aria-expanded", "true");
+        if (isMobile()) {
+          openMobile(tile);
+        } else {
+          // desktop: smooth-scroll the opened card if it's near the edge
+          setTimeout(function () {
+            var r = tile.getBoundingClientRect();
+            if (r.top < 80 || r.bottom > (window.innerHeight - 40)) {
+              tile.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }, 220);
+        }
+      });
     });
-    var dots = dotsEl.children;
-    var idx = 0;
-    function mark() {
-      for (var k = 0; k < dots.length; k++) dots[k].className = k === idx ? "active" : "";
-      countEl.textContent = (idx + 1) + " / " + texts.length;
-    }
-    function type(text, pos, done) {
-      textEl.textContent = text.slice(0, pos);
-      if (pos <= text.length) {
-        setTimeout(function () { type(text, pos + 1, done); }, 55);
-      } else if (done) {
-        setTimeout(done, 2400);
+
+    // When the breakpoint changes, reset state so we don't leave stale mobile bars
+    // visible on desktop (or vice-versa).
+    var lastMobile = isMobile();
+    mq.addEventListener("change", function () {
+      var nowMobile = isMobile();
+      if (nowMobile !== lastMobile) {
+        closeAll();
+        lastMobile = nowMobile;
       }
-    }
-    function erase(text, pos, done) {
-      textEl.textContent = text.slice(0, pos);
-      if (pos > 0) {
-        setTimeout(function () { erase(text, pos - 1, done); }, 16);
-      } else if (done) {
-        setTimeout(done, 450);
-      }
-    }
-    function cycle() {
-      mark();
-      type(texts[idx], 1, function () {
-        erase(texts[idx], texts[idx].length, function () {
-          idx = (idx + 1) % texts.length;
-          cycle();
-        });
-      });
-    }
-    // Start when visible
-    var started = false;
-    var io3 = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting && !started) { started = true; cycle(); io3.disconnect(); }
-      });
-    }, { threshold: 0.3 });
-    io3.observe(box);
-    }
+    });
   })();
 
   // Form
