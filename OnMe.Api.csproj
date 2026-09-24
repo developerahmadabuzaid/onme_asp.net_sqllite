@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Low memory for shared hosting (SmarterASP app pool RAM limit) -->
+    <!-- Workstation GC: no per-CPU heaps, collects earlier -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <!-- No background GC thread and its extra memory -->
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <!-- Profile-guided JIT keeps extra data in memory; not worth it for a site this size -->
+    <TieredPGO>false</TieredPGO>
+    <!-- Framework-dependent: uses the .NET runtime installed on the server -->
+    <SelfContained>false</SelfContained>
+    <!-- IIS starts the app with "dotnet OnMe.Api.dll", so OnMe.Api.exe is never used -->
+    <UseAppHost>false</UseAppHost>
+    <!-- OutOfProcess runs a separate dotnet.exe next to IIS (a bit more RAM than InProcess).
+         Keep it if the app pool is shared with another OutOfProcess app (avoids error 500.34);
+         otherwise InProcess uses less memory -->
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 0-9: higher = GC compacts harder to keep memory small, at a small CPU cost -->
+    <RuntimeHostConfigurationOption Include="System.GC.ConserveMemory" Value="7" />
+    <!-- Managed heap ceiling 256MB: GC does full cleanups before the app nears the pool's RAM limit.
+         Can be changed after publish in OnMe.Api.runtimeconfig.json (value in bytes) -->
+    <RuntimeHostConfigurationOption Include="System.GC.HeapHardLimit" Value="268435456" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Never publish local test uploads (they would land in the server's uploads folder)
+         or the Development settings -->
+    <Content Update="wwwroot\uploads\**" CopyToPublishDirectory="Never" />
+    <Content Update="appsettings.Development.json" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+  </ItemGroup>
+
+</Project>

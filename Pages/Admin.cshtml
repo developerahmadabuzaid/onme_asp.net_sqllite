@@ -1,0 +1,170 @@
+@page
+@model OnMe.Api.Pages.AdminModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <meta name="description" content="لوحة تحكم OnMe لإدارة الطلبات والمحتوى." />
+  <link rel="manifest" href="manifest.webmanifest" asp-append-version="true" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <title>OnMe — لوحة التحكم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" asp-append-version="true" />
+</head>
+<body>
+  <!-- Login -->
+  <div id="login-view" class="login-wrap" hidden>
+    <form id="loginForm" class="login-card">
+      <img src="assets/logo.jpeg" alt="OnMe" class="login-logo" />
+      <h1>لوحة تحكم OnMe</h1>
+      <p class="muted">سجّل الدخول لإدارة الطلبات والمحتوى</p>
+      <label>البريد الإلكتروني
+        <input type="email" name="email" value="superadmin@onme.sa" required dir="ltr" />
+      </label>
+      <label>كلمة المرور
+        <input type="password" name="password" value="Admin123!" required dir="ltr" />
+      </label>
+      <button type="submit" class="btn btn-primary">دخول</button>
+      <p class="err" id="loginErr"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app-view" hidden>
+    <aside class="side">
+      <div class="side-brand">
+        <img src="assets/logo.jpeg" alt="OnMe" />
+        <strong>OnMe Admin</strong>
+      </div>
+      <nav class="side-nav">
+        <button data-tab="dash" class="active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>الرئيسية</button>
+        <button data-tab="leads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 12h-5l-2 3h-6l-2-3H2"/><path d="M5.5 5.5 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.5A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.5Z"/></svg>الطلبات</button>
+        <button data-tab="content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>المحتوى</button>
+        <button data-tab="media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.5-4.5L6 21"/></svg>الوسائط</button>
+        <button data-tab="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.9 2.9l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.9-2.9l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.9-2.9l.1.1a1.7 1.7 0 0 0 1.9.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.9 2.9l-.1.1a1.7 1.7 0 0 0-.3 1.9v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg>الإعدادات</button>
+      </nav>
+      <div class="side-foot">
+        <span id="userEmail" class="muted small"></span>
+        <button id="logoutBtn" class="link-btn">تسجيل الخروج</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- Dashboard -->
+      <section id="tab-dash" class="tab active">
+        <h2>نظرة عامة</h2>
+        <div class="stats" id="stats"></div>
+        <h3>آخر الطلبات</h3>
+        <div class="table-wrap"><table id="latestTable">
+          <thead><tr><th>المرجع</th><th>الاسم</th><th>الجوال</th><th>الحالة</th><th>التاريخ</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </section>
+
+      <!-- Leads -->
+      <section id="tab-leads" class="tab">
+        <h2>الطلبات</h2>
+        <div class="toolbar">
+          <input type="search" id="q" placeholder="بحث بالاسم أو الجوال أو المرجع..." />
+          <select id="statusFilter">
+            <option value="">كل الحالات</option>
+            <option value="New">جديد</option>
+            <option value="Contacted">تم التواصل</option>
+            <option value="Reviewing">قيد المراجعة</option>
+            <option value="Quoted">تم تقديم عرض</option>
+            <option value="InProgress">قيد التنفيذ</option>
+            <option value="Completed">مكتمل</option>
+            <option value="Cancelled">ملغى</option>
+          </select>
+          <button id="searchBtn" class="btn">بحث</button>
+        </div>
+        <div class="table-wrap"><table id="leadsTable">
+          <thead><tr><th>الاسم</th><th>الحالة</th><th>التاريخ</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+
+        <div id="leadDetail" class="detail-card" hidden>
+          <h3 id="dTitle"></h3>
+          <p id="dMeta" class="muted small"></p>
+          <p id="dDesc" class="desc-box"></p>
+          <div class="row">
+            <label>الحالة
+              <select id="dStatus">
+                <option value="New">New — جديد</option>
+                <option value="Contacted">Contacted — تم التواصل</option>
+                <option value="Reviewing">Reviewing — قيد المراجعة</option>
+                <option value="Quoted">Quoted — تم تقديم عرض</option>
+                <option value="InProgress">InProgress — قيد التنفيذ</option>
+                <option value="Completed">Completed — مكتمل</option>
+                <option value="Cancelled">Cancelled — ملغى</option>
+              </select>
+            </label>
+            <button id="dSave" class="btn btn-primary">حفظ الحالة</button>
+          </div>
+          <h4>الملاحظات الداخلية</h4>
+          <ul id="dNotes" class="notes"></ul>
+          <div class="row">
+            <input id="noteInput" placeholder="أضف ملاحظة داخلية..." />
+            <button id="noteAdd" class="btn">إضافة</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content -->
+      <section id="tab-content" class="tab">
+        <h2>محتوى الصفحة</h2>
+        <h3>الأقسام</h3>
+        <div id="sections"></div>
+        <h3>الخدمات</h3>
+        <div id="services"></div>
+        <div class="row">
+          <input id="svcTitle" placeholder="عنوان خدمة جديدة" />
+          <input id="svcDesc" placeholder="شرح مختصر" />
+          <button id="svcAdd" class="btn">إضافة خدمة</button>
+        </div>
+        <h3>الأسئلة الشائعة</h3>
+        <div id="faqs"></div>
+        <div class="row">
+          <input id="faqQ" placeholder="سؤال جديد" />
+          <input id="faqA" placeholder="الإجابة" />
+          <button id="faqAdd" class="btn">إضافة سؤال</button>
+        </div>
+        <h3>أمثلة على المهام</h3>
+        <div id="examples"></div>
+        <div class="row">
+          <input id="exText" placeholder="مثال جديد على مهمة" class="grow" />
+          <button id="exAdd" class="btn">إضافة مثال</button>
+        </div>
+      </section>
+
+      <!-- Media -->
+      <section id="tab-media" class="tab">
+        <h2>الوسائط</h2>
+        <form id="uploadForm" class="row">
+          <input type="file" name="file" accept=".jpg,.jpeg,.png,.webp,.mp4" required />
+          <input name="alt" placeholder="نص بديل (اختياري)" />
+          <button class="btn btn-primary">رفع</button>
+        </form>
+        <p class="muted small">المدعوم: JPG, PNG, WEBP, MP4 — بحد أقصى 50MB.</p>
+        <div id="mediaGrid" class="media-grid"></div>
+      </section>
+
+      <!-- Settings -->
+      <section id="tab-settings" class="tab">
+        <h2>الإعدادات العامة</h2>
+        <div id="settingsForm"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+@page
+@model OnMe.Api.Pages.IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@Model.Setting("seo_title", "OnMe | خلّها علينا — وكيلك الشخصي لإنجاز مهامك")</title>
+  <meta name="description" content="@Model.Setting("seo_description", "عندك مهمة ما عندك وقت لها؟ أرسلها إلى OnMe، وخلّنا نراجع البحث والتواصل والتنسيق والمتابعة عنك.")" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <meta property="og:title" content="OnMe | خلّها علينا" />
+  <meta property="og:description" content="عندك مهمة؟ خلّها علينا. أرسل اللي تحتاجه ونبحث عن الطريقة المناسبة لتنفيذه." />
+  <meta property="og:image" content="assets/logo.jpeg" />
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpeg" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" asp-append-version="true" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="OnMe" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" asp-append-version="true" />
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="OnMe الرئيسية">
+        <img src="assets/logo.jpeg" alt="OnMe — خلّها علينا" />
+      </a>
+      <nav class="nav-links" id="primaryNav" aria-label="التنقل الرئيسي">
+        <a class="active" href="#top">الرئيسية</a>
+        <a href="#services">الخدمات</a>
+        <a href="#how">كيف نعمل؟</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#lead-form">اطلب مهمة الآن <span aria-hidden="true">←</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="فتح القائمة" aria-controls="primaryNav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-media">
+        <video id="heroVideo" class="hero-video" autoplay muted playsinline loop preload="auto" poster="assets/logo.jpeg" aria-label="فيديو تعريفي بمنصة OnMe"></video>
+        <div class="hero-shade"></div>
+        <button id="heroPlay" class="video-play" type="button" aria-label="تشغيل الفيديو"><span aria-hidden="true">▶</span></button>
+        <button id="heroMute" class="video-mute" type="button" aria-label="تشغيل الصوت" aria-pressed="false">تشغيل الصوت</button>
+      </div>
+      <div class="hero-shell">
+        <div class="hero-copy reveal">
+          <span class="hero-kicker">وكيلك الشخصي لإنجاز مهامك</span>
+          <h1>عندك مهمة؟<span>خلّها علينا.</span></h1>
+          <p>بدل ما تبحث وتتصل وتنسق وتنتظر... أرسل لنا اللي تحتاجه، ونتولى نحن البحث والتنسيق والمتابعة حتى توصل للنتيجة الممكنة.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="#lead-form">اطلب مهمة الآن <span aria-hidden="true">←</span></a>
+            <a class="btn btn-light btn-lg" href="#how"><span aria-hidden="true">▶</span> شاهد كيف نعمل</a>
+          </div>
+          <div class="trust-grid" aria-label="مميزات OnMe">
+            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span>خصوصية</span></div>
+            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span><span>سرعة</span></div>
+            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span>أمان</span></div>
+            <div class="trust-item"><span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><span>موثوقية</span></div>
+          </div>
+        </div>
+      </div>
+      <a class="hero-scroll" href="#services" aria-label="انتقل إلى الخدمات"><span>اكتشف المزيد</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="section-tag">خدماتنا</span>
+          <h2>وش ممكن <em>OnMe</em> ينجز لك؟</h2>
+          <p>مهمتك مو لازم تكون ضمن قائمة محددة. أرسل اللي تحتاجه، ونبحث عن أفضل طريقة للتعامل معه.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 8h4M8 12h8"/></svg></span><h3>المهام الإلكترونية</h3><p>بحث، إدخال، حقوقي، حجوزات، واتصالات.</p></article>
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h3M8 17h7"/></svg></span><h3>التسجيل والتنسيق</h3><p>مواعيد، جلسات، وترتيب المواعيد.</p></article>
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4"/><path d="M16 17h5v4h-5z"/></svg></span><h3>الأبحاث عن التنفيذ</h3><p>دراسة سهولة التنفيذ قبل أن نبدأ.</p></article>
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M8 10.5l1.7 1.7 3.6-3.7"/></svg></span><h3>البحث والمقارنة</h3><p>معلومات، خيارات، منتجات، وقرارات أذكى.</p></article>
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7M9 16h7"/></svg></span><h3>المراجعة والتنسيق</h3><p>ملفات، طلبات، ومراجعات.</p></article>
+          <article class="service-card reveal"><span class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span><h3>التواصل والتنسيق</h3><p>معلومات، تواصل، وتنسيق مع الجهات.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process-section" id="how">
+      <div class="container">
+        <div class="process-shell reveal">
+          <div class="process-heading">
+            <span class="section-tag">كيف نعمل؟</span>
+            <h2>من طلبك <em>إلى الإنجاز</em></h2>
+            <p>خمس مراحل واضحة، ونبقيك على اطلاع بكل خطوة.</p>
+          </div>
+          <ol class="process-timeline">
+            <li class="process-step"><span class="process-index">1</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg></span><h3>اكتب المهمة</h3><p>قل لنا بما تحتاجه، حتى لو لم تكن متأكدًا من خطواته.</p></li>
+            <li class="process-step"><span class="process-index">2</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v5h5M9 12h7M9 16h5"/></svg></span><h3>نراجع التفاصيل</h3><p>نفهم المطلوب والزمن المناسب والخطوة التالية.</p></li>
+            <li class="process-step"><span class="process-index">3</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><h3>نتولى ونتواصل</h3><p>نبحث، نسق، ونتواصل مع الجهات نيابة عنك.</p></li>
+            <li class="process-step"><span class="process-index">4</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></span><h3>نتابع ونرتب</h3><p>نتابع الخطوات ونحدّثك بكل جديد.</p></li>
+            <li class="process-step"><span class="process-index">5</span><span class="process-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8.5 12.2 2.4 2.4 4.8-5.4"/></svg></span><h3>نسلّم النتيجة</h3><p>نوضح لك ما تم وأين وصلنا.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section request-section">
+      <div class="container request-layout">
+        <div class="request-copy reveal">
+          <span class="section-tag">طلبك أسهل مما تتخيل</span>
+          <h2>خلّنا نرتّب همومك، وأنت ركّز على شغلك.</h2>
+          <p>عندك مهمة تحتاج وقت أو متابعة أو تنسيق؟ أرسلها لنا، ونبحث عن الطريق المناسب لتنفيذها داخل السعودية أو خارجها.</p>
+          <a class="btn btn-primary btn-lg" href="#lead-form">اطلب مهمة الآن <span aria-hidden="true">←</span></a>
+          <div class="request-note"><span class="request-note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.6 2.8 8.1 7 10 4.2-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><span>نحافظ على سرية بياناتك ونستخدمها لتنفيذ طلبك فقط.</span></div>
+        </div>
+        <div class="request-visual reveal">
+          <div class="phone-mockup" aria-label="معاينة لمتابعة المهمة">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen">
+              <div class="phone-brand"><img src="assets/logo.jpeg" alt="OnMe" /><span>مهامك في OnMe</span></div>
+              <div class="phone-task" id="exampleTyper">
+                <div class="tw-head"><span class="tw-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><span class="tw-who"><b>مهمتك الآن</b><small>نراجعها ونبدأ</small></span><span class="tw-live" aria-hidden="true"><i></i><i></i><i></i></span></div>
+                <p class="tw-text" aria-hidden="true"><span id="twText">أحتاج البحث والمقارنة والترتيب قبل اتخاذ قرار.</span><span class="tw-caret" aria-hidden="true"></span></p>
+                <div class="tw-foot"><span class="tw-progress" id="twDots" aria-hidden="true"></span><span class="tw-count" id="twCount">1 / 4</span></div>
+              </div>
+              <div class="phone-checklist" aria-label="مراحل المتابعة"><div><span>1</span><b>استلمنا طلبك</b></div><div><span>2</span><b>نبحث ونتواصل</b></div><div><span>3</span><b>ننسق ونتابع</b></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="impact-strip reveal" aria-label="مميزات الخدمة">
+          <div class="impact-item"><strong>6+</strong><span>أنواع المهام</span></div>
+          <div class="impact-item"><strong>5</strong><span>مراحل واضحة</span></div>
+          <div class="impact-item"><strong>24/7</strong><span>نتبعها معك</span></div>
+          <div class="impact-item"><strong>100%</strong><span>خصوصية وأمان</span></div>
+          <a class="impact-cta" href="#lead-form">جاهز تبدأ؟ <span aria-hidden="true">←</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section form-section" id="lead-form">
+      <div class="container form-layout">
+        <div class="form-intro reveal">
+          <span class="section-tag">نبدأ معك من هنا</span>
+          <h2>أرسل طلبك، وخلّنا نتولى الباقي.</h2>
+          <p>ما تحتاج تعرف الخطوات بالضبط. اكتب لنا المطلوب، وسنراجعه ونوضح لك الخطوة التالية.</p>
+          <ul class="form-points"><li><span aria-hidden="true">✓</span>رد خلال ساعات العمل</li><li><span aria-hidden="true">✓</span>بدون التزام أو عقود معقدة</li><li><span aria-hidden="true">✓</span>متابعة حتى آخر خطوة</li></ul>
+          <a class="phone-link" href="tel:@Model.Setting("phone", "0533851110")" dir="ltr">@Model.Setting("phone", "0533851110")</a>
+        </div>
+        <div class="form-card reveal">
+          <div id="form-view">
+            <div class="form-card-head"><span>طلب مهمة جديد</span><h3>وش تحتاج؟</h3></div>
+            <form id="leadForm" novalidate>
+              <div class="form-row">
+                <label class="field"><span>الاسم</span><span class="control"><input type="text" name="name" placeholder="اكتب اسمك" autocomplete="name" required /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span><small class="err" data-err="name"></small></label>
+                <label class="field"><span>رقم الجوال</span><span class="control"><input type="tel" name="phone" placeholder="05XXXXXXXX" inputmode="numeric" autocomplete="tel" required /><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><small class="err" data-err="phone"></small></label>
+              </div>
+              <label class="field"><span>وصف المهمة</span><span class="control"><textarea name="description" rows="4" placeholder="اكتب تفاصيل المهمة، وما النتيجة التي تريد الوصول إليها..." required></textarea><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"/></svg></span><small class="err" data-err="description"></small></label>
+              <fieldset class="field"><legend>وين المهمة؟ <em>(اختياري)</em></legend><div class="radios"><label><input type="radio" name="location" value="inside_saudi" /> داخل السعودية</label><label><input type="radio" name="location" value="outside_saudi" /> خارج السعودية</label><label><input type="radio" name="location" value="unsure" /> غير متأكد</label></div></fieldset>
+              <button type="submit" class="btn btn-primary btn-block" id="submitBtn">أرسل طلبي <span class="btn-arrow" aria-hidden="true">←</span></button>
+              <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <div id="success-view" hidden><div class="success-check" aria-hidden="true">✓</div><h3>وصلنا طلبك.</h3><p>شكرًا لك. استلمنا تفاصيل المهمة، وسنتواصل معك لمراجعة المطلوب والخطوات التالية.</p><p class="ref" id="leadRef"></p><a href="#top" class="text-link">العودة إلى الصفحة الرئيسية ←</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-heading reveal"><span class="section-tag">قبل ما ترسل</span><h2>أسئلة سريعة</h2><p>إذا ما لقيت جوابك، أرسل لنا وسنراجع طلبك مباشرة.</p></div>
+        <div class="accordion reveal">
+          <details class="acc" open><summary>هل تنفذون أي مهمة؟</summary><p>كل مهمة تختلف. أرسل التفاصيل وسنراجع إمكانية تنفيذها والخطوات المناسبة لها.</p></details>
+          <details class="acc"><summary>هل الخدمة داخل السعودية فقط؟</summary><p>يمكن أن تكون المهمة داخل السعودية أو خارجها، حسب طبيعة المهمة وإمكانية تنفيذها.</p></details>
+          <details class="acc"><summary>هل يجب أن أعرف طريقة تنفيذ المهمة؟</summary><p>لا. اشرح النتيجة التي تريد الوصول إليها، وسنبحث عن الطريقة المناسبة لما يمكننا توليه.</p></details>
+          <details class="acc"><summary>كم تستغرق المهمة؟</summary><p>تختلف المدة حسب طبيعة المهمة والجهات المطلوبة. نوضح الخطوات والمدة المتوقعة بعد مراجعة الطلب.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand"><img src="assets/logo.jpeg" alt="OnMe" /><div><strong>OnMe — خلّها علينا.</strong><span>وكيلك الشخصي لإنجاز مهامك</span></div></div>
+      <div class="footer-links"><a href="tel:@Model.Setting("phone", "0533851110")" dir="ltr">@Model.Setting("phone", "0533851110")</a><a href="#lead-form">أرسل طلبك</a><a href="#services">الخدمات</a></div>
+    </div>
+    <div class="container footer-bottom"><p class="copy">@Model.Setting("copyright", "© 2026 OnMe. All rights reserved.")</p><p class="credit"><span class="credit-dot" aria-hidden="true"></span> تطوير وتصميم شركة <strong class="credit-brand" dir="ltr">onyxvs</strong> لحلول الأعمال المتقدمة</p></div>
+  </footer>
+
+  <script src="app.js" asp-append-version="true"></script>
+</body>
+</html>
